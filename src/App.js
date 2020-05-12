@@ -2,30 +2,45 @@ import React, { useState, useEffect } from 'react';
 import Nav from './components/Nav';
 import Footer from './components/Footer';
 import Main from './components/Main';
+import { getData } from './api';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './index.css';
 import "./destinos.css";
 import "./profile.css";
+import Destino from './components/Destino';
+const query = `
+{
+  allPlaces {
+    id
+    titulo
+    imagen
+  }
+}
+`
 
 function App() {
   // Declara estado para arreglo de paises
   const [paises, setPaises] = useState([]);
   
-  // Obtiene los datos de la API
+  // Obteniendo datos de GraphQL
   useEffect(() => {
     async function llamarAPI() {
-      const fetchResult = await fetch('https://bedu-travels-node.herokuapp.com/tours');
-      const resultado = await fetchResult.json();
-      setPaises(resultado.data);
+      const result = await getData('http://localhost:4000', {query})
+      const { data } = await result.json()
+      setPaises(data.allPlaces);
     }
     llamarAPI();
   }, []);
 
   return (
-    <>
+    <BrowserRouter>
       <Nav />
-      <Main paises={paises} />
+      <Switch>
+        <Route path="/destinos/:id" component={Destino}/>
+        <Route path="/destinos" render={(props) => <Main {...props} paises={paises} /> }/>
+      </Switch>
       <Footer />
-    </>
+    </BrowserRouter>
   );
 }
 

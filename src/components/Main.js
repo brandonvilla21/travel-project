@@ -2,7 +2,6 @@ import React from 'react';
 import Card from './Card';
 
 function Main(props) {
-  const { history } = props;
   return (
     <section className="text-center margin-top-lg">
       <p className="margin-bottom-sm title-font text-shadow">
@@ -20,7 +19,6 @@ function Main(props) {
                   imagen={pais.imagen}
                   titulo={pais.titulo}
                   key={pais.id}
-                  onClickCard={() => history.push(`/destinos/${pais.id}`)}
                 />
               )
             })

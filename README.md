@@ -1,7 +1,7 @@
 #### Para instalar y ejecutar el proyecto, ejecuta los siguientes comandos en la consola:
 
 ```sh
-git clone 
+git clone https://github.com/brandonvilla21/travel-project.git
 ```
 ```sh
 cd travel-project

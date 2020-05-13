@@ -15,11 +15,14 @@ function Main(props) {
           {
             props.paises.map(pais => {
               return (
-                <Card
-                  imagen={pais.imagen}
-                  titulo={pais.titulo}
-                  key={pais.id}
-                />
+                  <Card
+                    imagen={pais.imagen}
+                    titulo={pais.titulo}
+                    key={pais.id}
+                    onClickCard={() => {
+                      props.history.push(`/destinos/${pais.id}`)
+                    }}
+                  />
               )
             })
           }
